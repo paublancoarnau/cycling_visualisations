@@ -35,8 +35,13 @@ df<-raw%>%
          LBL = gsub("[/0-9()]", "", LBL),
          Lomb = gsub("[/0-9()]", "", Lomb)
          ) %>%
+ # substr(rider,1,nchar(rider)-2) %>%
   filter(
     Year>2002)
+
+#df$name <- str_sub(df$name, end = -2)
+
+
 
 MSR<- df %>%
   count(MSR) %>%
@@ -72,6 +77,8 @@ df_monuments <- count_monuments %>%
     rank = dense_rank(desc(monuments))) %>%
     select(rank, rider, MSR, ToF, PR, LBL, Lomb, monuments)
 
+df_monuments$rider = substr(df_monuments$rider, 1, nchar(df_monuments$rider)-5)
+
 #add in region manually
 df_monuments$region<-c("SUI","BEL","BEL","ES","ITA","ES","ITA","SLO","ITA")
 df_monuments$region<-paste0("https://github.com/catamphetamine/country-flag-icons/tree/master/flags/1x1/",df_monuments$region,".svg")
@@ -104,7 +111,7 @@ table<-reactable(df_monuments%>%select(rank, rider, region, MSR, ToF, PR, LBL, L
                    rider = colDef(name= "Rider",
                                    align="left", width=250,
                                    cell=function(value){
-                                     image <- img(src = paste0("https://github.com/paublancoarnau/cycling_visualisations/tree/main/images_cyclists/",str_replace_all(tolower(value)," ","_"),".jpg"), style = "height: 33px;", alt = value)
+                                     image <- img(src = paste0("https://github.com/paublancoarnau/cycling_visualisations/tree/main/images_cyclists/",str_replace_all(tolower(value)," ","_"),".png"), style = "height: 33px;", alt = value)
                                      tagList(
                                        div(style = "display: inline-block;vertical-align:middle;width:50px", image),
                                        div(style="display: inline-block;vertical-align:middle;",
