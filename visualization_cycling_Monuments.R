@@ -104,7 +104,7 @@ table<-reactable(df_monuments%>%select(rank, rider, region, MSR, ToF, PR, LBL, L
                    rider = colDef(name= "Rider",
                                    align="left", width=250,
                                    cell=function(value){
-                                     image <- img(src = paste0("https://raw.githubusercontent.com/tashapiro/tanya-data-viz/main/tennis/images/",str_replace_all(tolower(value)," ","_"),".png"), style = "height: 33px;", alt = value)
+                                     image <- img(src = paste0("https://github.com/paublancoarnau/cycling_visualisations/tree/main/images_cyclists/",str_replace_all(tolower(value)," ","_"),".jpg"), style = "height: 33px;", alt = value)
                                      tagList(
                                        div(style = "display: inline-block;vertical-align:middle;width:50px", image),
                                        div(style="display: inline-block;vertical-align:middle;",
